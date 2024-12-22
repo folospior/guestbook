@@ -3,13 +3,12 @@ package main
 import (
 	"net/http"
 
-	"github.com/a-h/templ"
-	"github.com/folospior/guestbook/views/components"
+	"github.com/folospior/guestbook/handlers"
 )
 
 func main() {
 	router := http.NewServeMux()
-	router.HandleFunc("/", templ.Handler(components.Index()))
+	router.HandleFunc("/", handlers.HandleHome)
 	router.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
 
 	server := &http.Server{
